@@ -1,0 +1,400 @@
+/* Banner Section */
+.banner-sec {
+    padding: 200px 0;
+    text-align: center;
+    background-color: #eee;
+}
+/* Testimonials Section Starts */
+.testi-blk {
+    padding: 0 0 120px;
+}
+.hm-testimonials {
+    padding: 70px 0;
+    text-align: center;
+}
+.hm-testimonials .hm-testi-item {
+    background: #eeeeee;
+    padding: 40px 30px;
+    margin-right: 20px;
+}
+.hm-testimonials .hm-testi-item p {
+    font-size: 18px;
+    line-height: 1.65;
+    color: #000;
+    position: relative;
+}
+.hm-testimonials .hm-testi-item h3 {
+    color: #000;
+    font-size: 22px;
+    position: relative;
+    text-transform: capitalize;
+}
+.hm-testimonials .hm-testi-item h4.author {
+    color: #000;
+    font-size: 22px;
+}
+.hm-testimonials .testi-blk .owl-nav {
+    margin: 40px 0 0 0;
+}
+.hm-testimonials .testi-blk .owl-nav button {
+    background: #ccc !important;
+    width: 50px;
+    height: 40px;
+    margin: 0 5px;
+}
+.hm-testimonials .testi-blk .owl-nav button span {
+    font-size: 28px;
+    font-weight: bold;
+}
+.hm-testimonials .testi-blk .owl-nav button:hover {
+    background: #000 !important;
+}
+.hm-testimonials .testi-blk .owl-nav button:hover span {
+    color: #fff;
+}
+.hm-testimonials .testi-btn {
+    padding: 20px 0 0;
+}
+.hm-testimonials .testi-btn a {
+    background-color: #eeeeee;
+}
+.hm-testimonials .testi-btn a:hover {
+    background-color: #000;
+}
+/* Testimonials Section Ends */
+/* Home Blog Section Starts */
+.hm-blog-sec {
+    padding: 60px 0;
+}
+.hm-blog-sec .hm-blog-blk {
+    flex-wrap: wrap;
+    display: flex;
+}
+.hm-blog-sec .hmblg-item {
+    background: #ccc;
+    width: 32%;
+    padding: 20px;
+    margin: 0 0.5%;
+}
+.hm-blog-sec .hmblgcnt h3 {
+    font-size: 26px;
+    margin: 0 0 15px 0;
+    color: #000;
+    line-height: 1;
+}
+.hm-blog-sec .hmblgcnt p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 0 20px 0px;
+}
+.hm-blog-sec .hmpost_btn {
+    margin: 20px 0 10px 0;
+}
+.hm-blog-sec .hmpost_btn a {
+    font-size: 18px;
+    display: inline-block;
+    color: #fff;
+}
+.hm-blog-sec .hmnews-btn {
+    text-align: center;
+    margin: 30px 0 0 0;
+}
+.hm-blog-sec .hmnews-btn a {
+    background-color: #eee;
+}
+.hm-blog-sec .hmnews-btn a:hover {
+    background-color: #000;
+}
+/* Home Blog Section Ends */
+/* HomePage FAQ's Section Starts */
+.hm-faq-sec {
+    padding: 50px 0;
+}
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.accordion-section-content {
+    background-color: #999;
+    padding: 10px;
+    border-radius: 0 0 5px 5px;
+}
+.accordion-section:not(.accordien-active) .accordion-section-content {
+    display: none;
+}
+.accordion-heading {
+    background-color: #ccc;
+    padding: 10px 15px;
+    margin: 0;
+    cursor: pointer;
+}
+.accordion-section-content p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0px;
+}
+.accordion-section .accordion-heading {
+    border-radius: 5px;
+    font-size: 26px;
+    margin: 0;
+    color: #000;
+    line-height: 1;
+}
+.accordion-section.accordien-active .accordion-heading {
+    border-radius: 5px 5px 0 0;
+}
+/* HomePage FAQ's Section Ends */
+/* HomePage Tab Section Starts */
+.tab-btn,
+.tab-btn:hover {
+    padding: 15px 30px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #999;
+    top: -2px;
+    position: relative;
+    outline: none;
+	width: max-content;
+}
+.tab-btn:hover {
+    background-color: #f6f6f6;
+	cursor: pointer;
+}
+.tab-btn.tab-btn-active {
+    background-color: #f2f2f2;
+    border-color: #f2f2f2;
+    top: 2px;
+    border-radius: 5px 5px 0 0;
+}
+.tab-content-area {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 0 5px 5px 5px;
+}
+.tab-pane {
+    display: none;
+}
+.tab-pane.tab-pane-active {
+    display: block;
+}
+/* HomePage Tab Section Ends */
+
+
+
+/* HomePage Form Section Starts */
+
+ 
+.hm-form-sec{
+    padding: 50px 0;
+    background-color: #ccc;
+}
+
+ p.gform_required_legend {
+    display: none;
+}
+.gfield input.large,
+.gfield textarea.large {
+    font-family: 'Wix Madefor Text' !important;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    color: #000000 !important;
+    letter-spacing: 0px !important;
+    line-height: 1 !important;
+    padding: 20px 30px !important;
+    border: 0;
+    outline: 0;
+    height: auto;
+    border-radius: 0 !important;
+    background-color: #fff !important;
+	width: 100%;
+}
+ .gform_title {
+    display: none;
+ }
+
+.gchoice {
+    text-align: right;
+    width: fit-content;
+    margin: 0 0 0 auto;
+}
+ 
+.gfield textarea.large {
+    height: 140px !important;
+    resize: none;
+    min-height: auto !important;
+}
+ 
+.gfield input::placeholder,
+.gfield textarea::placeholder {
+    color: #000;
+}
+ .gform_wrapper .gfield_error [aria-invalid=true] {
+    border: none !important;
+}
+.form-links span,
+.form-links a,
+.gfield-choice-input+label {
+    font-family: 'Wix Madefor Text' !important;
+    font-weight: 400;
+    font-size: 16px !important;
+    line-height: 1;
+    letter-spacing: 0px;
+    color: #fff !important;
+}
+ 
+.form-links {
+    color: #fff;
+}
+.form-links span,
+.form-links a {
+    cursor: pointer;
+    text-decoration: none;
+}
+ 
+.form-links a:hover {
+    color: #8ca3b7 !important;
+}
+ 
+.gform_wrapper .top_label input[type="checkbox"] {
+    margin: 0px 0px 0px 13px !important;
+    width: 15px !important;
+    height: 15px !important;
+}
+ 
+.gform-theme--foundation {
+    display: grid;
+    --gf-form-gap-y: 15px;
+    --gf-form-gap-y: 18px;
+}
+ 
+#field_submit,
+.gform-theme--foundation .gform_footer {
+    display: flex;
+    justify-content: center;
+}
+ 
+.gform_footer input[type="submit"] {
+    padding: 18px 58px !important;
+    font-family: 'Wix Madefor Text' !important;
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    border-radius: 55px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    background: #000;
+    color: #fff !important;
+    border: 2px solid #0000;
+    margin: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    cursor: pointer !important;
+    transition: 0.3s !important;
+}
+ 
+.gform_footer input[type="submit"]:hover {
+    background: #000;
+}
+ .leave-blank{
+    display: none;
+ }
+.gchoice.gchoice_1_12_1 input {
+    width: 15px;
+    height: 15px;
+}
+ 
+.popup {
+    max-width: 60%;
+}
+ 
+div#popup-container {
+    position: relative;
+}
+ 
+div#validation_message_6_12 {
+    left: 80px;
+    top: 7px;
+}
+ 
+.gform_wrapper .gform_validation_errors {
+    display: none;
+}
+ 
+.gform_wrapper .gfield {
+    position: relative;
+}
+ 
+#myPopup.show {
+    display: block;
+    visibility: visible;
+    z-index: 99;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+ 
+.gform_wrapper .gfield .validation_message.gfield_validation_message,
+.gform_wrapper .gfield .instruction.validation_message {
+    position: absolute;
+    top: 4px;
+    background: none;
+    padding: 0px;
+    line-height: 1;
+    color: #ff0000;
+    font-size: 13px;
+    right: 10px;
+    font-weight: 500;
+    width: auto;
+    border: none;
+    pointer-events: none;
+    margin: 0;
+}
+ 
+.gform_wrapper .gfield .instruction.validation_message {
+    bottom: 8px;
+    top: inherit !important;
+}
+fieldset .gfield_description.validation_message.gfield_validation_message {
+    top: inherit !important;
+    bottom: -13px;
+}
+.popup {
+    max-width: 100%;
+}
+ 
+.gform_wrapper.gravity-theme .gform_fields {
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+ 
+#myPopup.show {
+    position: absolute;
+    z-index: 5;
+    padding: 10px;
+    display: none;
+    margin: 0;
+}
+ 
+.formpopuptext {
+    transition: transform .15s ease-out .15s;
+    pointer-events: none;
+    text-align: center;
+    border: 1px solid rgb(22 80 41);
+    background: #fff;
+    font-size: 14px;
+    color: #000 !important;
+    line-height: 1.5;
+    max-width: 650px;
+    padding: 10px;
+    position: absolute;
+    z-index: 5;
+    display: none;
+}
+ 
+.gform_wrapper.gravity-theme .gform_footer {
+    margin: 0;
+    padding: 13px 0 0 0;
+    justify-content: center;
+}
+ 
