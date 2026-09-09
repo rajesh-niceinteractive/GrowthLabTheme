@@ -15,6 +15,7 @@
       <?php dynamic_sidebar('hm_form_sec'); ?>
    </div>
 </section>
+</main>
 <footer class="site-footer">
     <div class="container">
         <div class="ftr-logo">
