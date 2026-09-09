@@ -77,4 +77,5 @@
             </a>
         </div>
     </header>
+	<main id="site-main-area">
 
