@@ -161,16 +161,14 @@ function my_acf_load_menu_choices( $field ) {
     return $field;
 }
 
-/* Remove jQuery Migrate */
-function remove_jquery_migrate( $scripts ) {
-    if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
-        $script = $scripts->registered['jquery'];
+function remove_jquery_migrate_script() {
 
-        if ( $script->deps ) {
-            $script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
-        }
+    if ( ! is_admin() ) {
+        /* Remove jQuery Migrate */
+        wp_dequeue_script( 'jquery-migrate' );
+        wp_deregister_script( 'jquery-migrate' );
     }
 }
-add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
+add_action( 'wp_enqueue_scripts', 'remove_jquery_migrate_script', 100 );
 /* Remove Gravity Forms Css  */
 add_filter( 'gform_disable_css', '__return_true' );
