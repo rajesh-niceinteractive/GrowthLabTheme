@@ -134,7 +134,7 @@ function register_theme_sidebars() {
 
 require_once( get_stylesheet_directory() . '/inc/reviews-cpt.php');
 require_once( get_stylesheet_directory() . '/inc/theme-options.php');
-
+require_once get_stylesheet_directory() . '/inc/svg-support.php';
 
 
 // Common Block Function
