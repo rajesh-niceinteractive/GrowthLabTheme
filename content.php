@@ -11,7 +11,7 @@
 
 <div class="post-item">
     <div class="post-img">
-        <?php $img_url = (has_post_thumbnail()) ? get_the_post_thumbnail_url(get_the_ID(), 'blog_img') : get_stylesheet_directory_uri().'/images/default-img.webp'; ?>
+        <?php $img_url = (has_post_thumbnail()) ? get_the_post_thumbnail_url(get_the_ID(), 'full') : get_stylesheet_directory_uri().'/images/default-img.webp'; ?>
         <div class="blog-post-img"><a href="<?php the_permalink(); ?>"><img src="<?php echo $img_url; ?>" alt="<?php echo get_the_title(); ?>"></a></div>
     </div>
     <div class="post-cnt">
