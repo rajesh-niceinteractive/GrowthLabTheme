@@ -138,13 +138,13 @@ require_once get_stylesheet_directory() . '/inc/svg-support.php';
 
 
 // Common Block Function
-
+/*
 add_shortcode( 'CommonBlock', function() {
     ob_start(); ?>
     <div class="innerpage-common-block"><?php dynamic_sidebar('innerpage_cmn_blk'); ?></div>
     <?php return ob_get_clean();
 });
-
+*/
 
 if ( ! function_exists( 'my_custom_pagination' ) ) {
     function my_custom_pagination( $args = array() ) {
