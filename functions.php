@@ -39,98 +39,16 @@ function register_theme_menus() {
         'notfound' => __('Page Not Found Menu'),
     ]);
 }
+/*
 function add_file_types_to_uploads($file_types){
     $new_filetypes = array();
     $new_filetypes['svg'] = 'image/svg+xml';
     return array_merge($file_types, $new_filetypes);
 }
 add_filter('upload_mimes', 'add_file_types_to_uploads');
-
+*/
 add_action('widgets_init', 'register_theme_sidebars');
-function register_theme_sidebars() {
-        register_sidebar([
-        'name'          => __('Home Top Right'),
-        'id'            => 'hm_top_rit',
-        'description'   => __('Home Top Right'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-        register_sidebar([
-        'name'          => __('Home Banner Section'),
-        'id'            => 'hm_bnr_sec',
-        'description'   => __('Banner Section'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-    register_sidebar([
-        'name'          => __('Home Faq Section'),
-        'id'            => 'hm_faq_sec',
-        'description'   => __('FAQ Section'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-    register_sidebar([
-        'name'          => __('Home Tab Section'),
-        'id'            => 'hm_tab_sec',
-        'description'   => __('Tab Section'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-    register_sidebar([
-        'name'          => __('Home Form Section'),
-        'id'            => 'hm_form_sec',
-        'description'   => __('Form Section'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-
-    register_sidebar([
-        'name'          => __('Page Sidebar'),
-        'id'            => 'page_sidebar',
-        'description'   => __('Page Sidebar'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-    register_sidebar([
-        'name'          => __('Common Block'),
-        'id'            => 'innerpage_cmn_blk',
-        'description'   => __('Common Block'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-    register_sidebar([
-        'name'          => __('Blog Archives Sidebar'),
-        'id'            => 'blog_archives_sidebar',
-        'description'   => __('Blog Archives Sidebar'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-    register_sidebar([
-        'name'          => __('Blog Sidebar'),
-        'id'            => 'blog_sidebar',
-        'description'   => __('Blog Sidebar'),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<div class="widget-title">',
-        'after_title'   => '</div>',
-    ]);
-}
+function register_theme_sidebars() {}
 
 require_once( get_stylesheet_directory() . '/inc/reviews-cpt.php');
 require_once( get_stylesheet_directory() . '/inc/theme-options.php');
