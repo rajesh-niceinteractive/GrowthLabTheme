@@ -29,5 +29,4 @@ function reviews_init() {
         'supports' => array( 'title', 'editor', 'revisions' ),
     );
     register_post_type( 'review', $args );
-    flush_rewrite_rules();
 }
