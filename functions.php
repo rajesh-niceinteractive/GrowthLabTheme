@@ -22,11 +22,13 @@ add_filter( 'widget_text', 'shortcode_unautop');
 add_filter( 'widget_text', 'do_shortcode');
 
 /* Header logo preload class */
+/*
 function custom_logo_class($html) {
     $html = str_replace( 'class="custom-logo"', 'class="wmu-preview-img"', $html );
     return $html;
 }
 add_filter('get_custom_logo', 'custom_logo_class');
+*/
 
 add_action('after_setup_theme', 'register_theme_menus');
 function register_theme_menus() {
