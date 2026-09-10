@@ -40,7 +40,7 @@
         <div class="ftrlink"><?php wp_nav_menu( array( 'theme_location' => 'footer2menu', 'container_class' => 'copyrightmenu' )); ?></div>
         <div class="growthlab">
             <a href="https://growthlabseo.com/" target="_blank" rel="noindex nofollow">
-                <img width="232" height="50" src="<?php echo get_stylesheet_directory_uri(); ?>/images/growthlab_white.webp" alt="Growth Lab Seo" no-lazy rel="noindex nofollow">
+                <img width="232" height="50" src="<?php echo get_stylesheet_directory_uri(); ?>/images/growthlab_white.webp" alt="Growth Lab Seo" loading="lazy" decoding="async" rel="noindex nofollow">
             </a>
         </div>
     </div>
