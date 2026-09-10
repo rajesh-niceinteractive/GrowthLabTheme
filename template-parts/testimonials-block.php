@@ -3,7 +3,7 @@
     <?php $testimonial = new WP_Query( array(
         'post_type' => 'review',
         'posts_per_page' => 5,
-        'order_by' => 'date',
+        'orderby' => 'date',
         'order' => 'DESC',
     ));
     if($testimonial->have_posts()) :
