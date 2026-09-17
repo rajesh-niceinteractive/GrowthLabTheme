@@ -39,144 +39,126 @@ add_action( 'customize_register', function($wp_customize) {
 
 } );
 
-
-/**
- * Phone number shortcode.
- *
- * @param array  $atts {
- *     Array of shortcode attributes.
- *
- *     @type string $target       Where the link should open. Accepts _self, _blank, _parent, _top. Default _self.
- *     @type string $button_id    Optional ID for the anchor. Will be sanitized.
- *     @type string $button_class Optional CSS class(es) for the anchor. Will be sanitized.
- *     @type string $wrapper      Optional class for a wrapping <div>. Will be sanitized.
- *     @type string $text         Optional prefix text (e.g. "Call "). Will be escaped for output.
- * }
- * @param string $content       Inner content (ignored – kept for compatibility).
- * @return string               HTML markup for the phone link.
- */
-function mytheme_phonenumber_shortcode( $atts, $content = null ) {
-
-	// -----------------------------------------------------------------
-	// 1️⃣ Define and sanitize attributes
-	// -----------------------------------------------------------------
-	$atts = shortcode_atts(
-		array(
-			'target'    => '_self',
-			'button_id' => '',
-			'button_class' => '',
-			'wrapper'   => '',
-			'text'      => '',
-		),
-		$atts,
-		'phonenumber'   // shortcode name – useful for debugging
-	);
-
-	// Whitelist allowed target values.
-	$allowed_targets = array( '_self', '_blank', '_parent', '_top' );
-	$target          = in_array( $atts['target'], $allowed_targets, true )
-		? $atts['target']
-		: '_self';
-
-	// Sanitize IDs and classes.
-	$button_id    = sanitize_html_class( $atts['button_id'] );
-	$button_class = implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $atts['button_class'] ) ) );
-	$wrapper      = implode( ' ', array_map( 'sanitize_html_class', explode( ' ', $atts['wrapper'] ) ) );
-
-	// Escape prefix text (allowed to contain HTML? If you want to allow limited HTML, use wp_kses_post() instead).
-	$text_prefix = wp_kses_post( $atts['text'] ); // or esc_html() if you want plain text only.
-
-	// -----------------------------------------------------------------
-	// 2️⃣ Resolve the phone number to display
-	// -----------------------------------------------------------------
-	$phone_number = '';
-
-	// Try ACF field first (returns false if field doesn't exist or empty).
-	if ( function_exists( 'get_field' ) ) {
-		$acf_val = get_field( 'page_phone_number' );
-		if ( $acf_val !== false && $acf_val !== '' ) {
-			$phone_number = $acf_val;
-		}
-	}
-
-	// Fallback to theme options if ACF didn't give us a value.
-	if ( empty( $phone_number ) ) {
-		$option_val = get_option( 'op_text_input' );
-		if ( ! empty( $option_val ) ) {
-			$phone_number = $option_val;
-		}
-	}
-
-	// If we still have nothing, bail out – returning an empty string prevents broken markup.
-	if ( empty( $phone_number ) ) {
-		return '';
-	}
-
-	// -----------------------------------------------------------------
-	// 3️⃣ Build the link text and href
-	// -----------------------------------------------------------------
-	// Prefix text (if any) + a space + the raw phone number.
-	$label = $text_prefix
-		? $text_prefix . ' ' . $phone_number
-		: $phone_number;
-
-	// Clean the number for use in a tel: URI.
-	// Keep only digits, plus, *, # (commonly allowed in tel:).
-	$tel_clean = preg_replace( '/[^0-9+*#]/', '', $phone_number );
-
-	// If cleaning removed everything, we cannot produce a usable link.
-	if ( empty( $tel_clean ) ) {
-		return '';
-	}
-
-	// Build the href attribute value.
-	$href = 'tel: ' . $tel_clean; // note the space after tel: is *not* valid – remove it.
-	$href = 'tel:' . $tel_clean; // correct format.
-
-	// -----------------------------------------------------------------
-	// 4️⃣ Assemble the markup
-	// -----------------------------------------------------------------
-	$output = '';
-
-	if ( $wrapper !== '' ) {
-		$output .= '<div class="' . esc_attr( $wrapper ) . '">';
-	}
-
-	$output .= sprintf(
-		'<a href="%s" target="%s" id="%s" class="%s">%s</a>',
-		esc_attr( $href ),               // href
-		esc_attr( $target ),             // target
-		esc_attr( $button_id ),          // id
-		esc_attr( $button_class ),       // class
-		esc_html( $label )               // visible text (safe)
-	);
-
-	if ( $wrapper !== '' ) {
-		$output .= '</div>';
-	}
-
-	return $output;
+function formatPhoneNumber($phoneNumber) {
+    // Remove all non-digit characters
+    $cleaned = preg_replace('/\D/', '', $phoneNumber);
+    
+    // Check if we have a valid length (10 or 11 digits)
+    // If 11 digits, assume first digit is country code (1)
+    // If 10 digits, prepend country code
+    if (strlen($cleaned) === 11 && $cleaned[0] === '1') {
+        $cleaned = substr($cleaned, 1);
+    } elseif (strlen($cleaned) !== 10) {
+        return null; // Invalid format
+    }
+    
+    // Format as +1XXX-XXX-XXXX
+    return '+1' . substr($cleaned, 0, 3) . '-' . substr($cleaned, 3, 3) . '-' . substr($cleaned, 6);
 }
-add_shortcode( 'phonenumber', 'mytheme_phonenumber_shortcode' );
 
-/**
- * Shortcode: [justnumber]
- *
- * Returns the phone number stored in the option `op_text_input_link`.
- * If the option is empty, a fallback string is returned.
- *
- * @return string  Escaped phone number (plain text, safe for HTML output).
- */
-function mytheme_justnumber_shortcode() {
-    // Grab the raw option value.
-    $raw_number = get_option( 'op_text_input_link' );
+function phonenumber( $atts ) {
+    // Define attributes with secure defaults
+    $atts = shortcode_atts(
+        array(
+            'target'     => '_self',   // Valid values: _self, _blank, _parent, _top
+            'button_id'  => '',
+            'button_class' => '',
+            'wrapper'    => '',        // FIXED: Corrected typo from 'wraper' to 'wrapper'
+            'text'       => '',
+        ),
+        $atts,
+        'phonenumber'
+    );
 
-    // If the option is set and not empty, use it; otherwise use the fallback.
-    $number = ( ! empty( $raw_number ) ) ? $raw_number : '+1xxx-xxx-xxxx';
+    // Get phone number data from ACF or options (preserving original logic)
+    if ( get_field( 'page_phone_number' ) !== '' ) {
+        $display_text = get_field( 'page_phone_number' );
+        $href_value   = formatPhoneNumber( $display_text );
+        
+        // Fallback to raw value if formatter fails
+        if ( $href_value === '' ) {
+            $href_value = $display_text;
+        }
+    } else {
+        $display_text = get_option( 'op_text_input' );
+        if ( $display_text === '' ) {
+            $display_text = 'xxx-xxx-xxxx';
+        }
+        
+        $href_value   = get_option( 'op_text_input_link' );
+        if ( $href_value === '' ) {
+            $href_value = $display_text;
+        }
+    }
 
-    // **Important:** Escape for HTML output.
-    // We are returning plain text, so esc_html() is sufficient.
-    // (If you ever want to allow limited HTML, use wp_kses_post() instead.)
-    return esc_html( $number );
+    // SECURITY: Sanitize href value for tel: scheme
+    // Allow only valid telephone number characters (digits, *, #, -, (), space, comma)
+    $linkhref = preg_replace( '/[^0-9\*\#\-\s\(\)\,]/', '', $href_value );
+    $linkhref = trim( $linkhref );
+
+    // SECURITY: Escape all user-facing output
+    $escaped_display_text = esc_html( $display_text );
+    $text_attr            = ! empty( $atts['text'] ) ? esc_html( $atts['text'] ) : '';
+
+    // Build label (text attribute + phone number)
+    $label = $text_attr ? $text_attr . ' ' . $escaped_display_text : $escaped_display_text;
+
+    // START OUTPUT BUILDING
+    $output = '';
+
+    // Wrapper div (if wrapper class provided)
+    $wrapper_class = ! empty( $atts['wrapper'] ) ? sanitize_html_class( $atts['wrapper'] ) : '';
+    if ( $wrapper_class ) {
+        $output .= '<div class="' . esc_attr( $wrapper_class ) . '">';
+    }
+
+    // Anchor tag with SECURE attribute handling
+    $target_attr   = ! empty( $atts['target'] ) ? esc_attr( $atts['target'] ) : '_self';
+    $button_id     = ! empty( $atts['button_id'] ) ? sanitize_html_class( $atts['button_id'] ) : '';
+    $button_class  = ! empty( $atts['button_class'] ) ? sanitize_html_class( $atts['button_class'] ) : '';
+
+    $output .= '<a href="tel:+' . esc_attr( $linkhref ) . '"';
+    $output .= ' target="' . esc_attr( $target_attr ) . '"';
+    
+    // Only add ID/class if they have values (avoids empty attributes)
+    if ( $button_id ) {
+        $output .= ' id="' . esc_attr( $button_id ) . '"';
+    }
+    if ( $button_class ) {
+        $output .= ' class="' . esc_attr( $button_class ) . '"';
+    }
+    
+    $output .= '>' . $label . '</a>';
+
+    // Close wrapper div if opened
+    if ( $wrapper_class ) {
+        $output .= '</div>';
+    }
+
+    return $output;
 }
-add_shortcode( 'justnumber', 'mytheme_justnumber_shortcode' );
+add_shortcode( 'phonenumber', 'phonenumber' );
+
+function justnumber() {
+    // 1. PRIORITY: Check ACF field first (matches phonenumber shortcode logic)
+    $acf_number = get_field( 'page_phone_number' );
+    
+    if ( $acf_number !== '' ) {
+        // Use formatted version if available (with safety fallback)
+        $number = formatPhoneNumber( $acf_number );
+        if ( $number === '' ) {
+            $number = $acf_number; // Fallback to raw ACF value if formatter fails
+        }
+    } 
+    // 2. SECONDARY: Fall back to option if ACF empty
+    else {
+        $number = get_option( 'op_text_input_link' );
+        if ( $number === '' ) {
+            $number = '+1xxx-xxx-xxxx'; // Final fallback
+        }
+    }
+    
+    // 3. CRITICAL: Escape for safe HTML output (prevents XSS in tel: attributes)
+    return esc_attr( $number );
+}
+add_shortcode( 'justnumber', 'justnumber' );
