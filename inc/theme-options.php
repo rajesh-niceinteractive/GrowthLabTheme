@@ -93,8 +93,8 @@ function phonenumber( $atts ) {
 
     // SECURITY: Sanitize href value for tel: scheme
     // Allow only valid telephone number characters (digits, *, #, -, (), space, comma)
-    $linkhref = preg_replace( '/[^0-9\*\#\-\s\(\)\,]/', '', $href_value );
-    $linkhref = trim( $linkhref );
+    /*$linkhref = preg_replace( '/[^0-9\*\#\-\s\(\)\,]/', '', $href_value );*/
+    $linkhref = trim( $href_value );
 
     // SECURITY: Escape all user-facing output
     $escaped_display_text = esc_html( $display_text );
